@@ -1,0 +1,154 @@
+SELECT * FROM employees;
+SELECT employee_id, first_name, last_name, hire_date FROM employees;
+
+SELECT employee_id,first_name,last_name,
+    DATEDIFF(year, hire_date, '2021-01-01')
+FROM
+    employees;
+    
+    SELECT employee_id,first_name,last_name,DATEDIFF(year, hire_date, '2021-01-01') as workinghere
+FROM
+    employees;
+    
+    
+    SELECT employee_id,first_name,last_name,hire_date,salary
+FROM
+	employees
+ORDER BY
+	first_name;
+  
+  
+  SELECT employee_id,first_name,last_name,hire_date,salary
+FROM
+	employees
+ORDER BY
+	first_name,
+	last_name DESC;
+  
+  
+  SELECT employee_id,first_name,last_name,hire_date,salary
+FROM
+	employees
+ORDER BY
+	salary DESC;
+  
+  SELECT top 1 employee_id,first_name,last_name,hire_date,salary
+FROM
+	employees
+ORDER BY
+	first_name,
+	last_name DESC;
+  
+  
+  
+  SELECT 
+    DISTINCT salary
+FROM
+    employees
+ORDER BY salary DESC;
+
+SELECT DISTINCT job_id,salary
+FROM
+	employees
+ORDER BY job_id,salary DESC;
+
+--null distinct example
+SELECT DISTINCT
+	phone_number
+FROM
+	employees;
+  
+  
+  SELECT TOP 5
+    employee_id, first_name, last_name
+FROM
+    employees
+ORDER BY first_name
+
+--The OFFSET FETCH clause allows you to skip N first rows in a result set before starting to return any rows.
+--returns the first employee who has the highest salary
+SELECT 
+    employee_id, 
+    first_name, 
+    last_name, 
+    salary
+FROM employees
+ORDER BY 
+    salary DESC
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY;
+
+--sorts the employees by salary, skips the first five employees with the highest salary, and fetches the next five ones
+SELECT 
+    employee_id, 
+    first_name, 
+    last_name, 
+    salary
+FROM employees
+ORDER BY 
+    salary DESC
+OFFSET 5 ROWS
+FETCH NEXT 5 ROWS ONLY;
+
+
+
+---WHERE examples
+SELECT
+	employee_id,
+	first_name,
+	last_name,
+	salary
+FROM
+	employees
+WHERE
+	salary > 14000
+ORDER BY
+	salary DESC;
+  
+  SELECT
+	employee_id,
+	first_name,
+	last_name,
+	department_id
+FROM
+	employees
+WHERE
+	department_id = 5
+ORDER BY
+	first_name;
+  
+  
+  SELECT
+	employee_id,
+	first_name,
+	last_name
+FROM
+	employees
+WHERE
+	last_name = 'Chen';
+  
+  
+  SELECT
+	employee_id,
+	first_name,
+	last_name,
+	hire_date
+FROM
+	employees
+WHERE
+	hire_date >= '1999-01-01'
+ORDER BY
+	hire_date DESC;
+  
+  
+  SELECT
+	employee_id,
+	first_name,
+	last_name,
+	hire_date
+FROM
+	employees
+WHERE
+	YEAR (hire_date) = 1999
+ORDER BY
+	hire_date DESC;
