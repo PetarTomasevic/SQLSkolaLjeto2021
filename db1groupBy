@@ -1,0 +1,97 @@
+SELECT
+	department_id,
+	COUNT(employee_id) headcount
+FROM
+	employees
+GROUP BY
+	department_id;
+  
+  --SQL GROUP BY with INNER JOIN example
+  SELECT
+	e.department_id,
+	d.department_name AS departmentName,
+	COUNT(employee_id) numofemployees
+FROM
+	employees e
+INNER JOIN  departments AS d ON d.department_id = e.department_id
+GROUP BY
+	e.department_id,d.department_name;
+  
+  --SQL GROUP BY with ORDER BY example
+SELECT 
+    e.department_id,
+    d.department_name,
+    COUNT(employee_id) headcount
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_id = e.department_id
+GROUP BY e.department_id,d.department_name
+ORDER BY headcount DESC;
+
+--SQL GROUP BY with HAVING example
+SELECT 
+    e.department_id,
+    d.department_name,
+    COUNT(e.employee_id) headcount
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_id = e.department_id
+GROUP BY e.department_id,d.department_name
+HAVING COUNT(e.employee_id) > 5
+ORDER BY headcount DESC;
+
+--SQL GROUP BY with MIN, MAX, and AVG example
+SELECT 
+    e.department_id,
+    d.department_name,
+    MIN(e.salary) min_salary,
+    MAX(e.salary) max_salary,
+    ROUND(AVG(e.salary), 2) average_salary
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_id = e.department_id
+GROUP BY e.department_id,d.department_name;
+
+--SQL GROUP BY with SUM function example
+SELECT 
+    e.department_id,
+    d.department_name,
+    SUM(e.salary) total_salary
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_id = e.department_id
+GROUP BY e.department_id,d.department_name;
+
+--SQL GROUP BY multiple columns
+SELECT 
+    e.department_id,
+    d.department_name,
+    e.job_id,
+    j.job_title,
+    COUNT(e.employee_id)
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_id = e.department_id
+        INNER JOIN
+    jobs j ON j.job_id = e.job_id
+GROUP BY e.department_id,d.department_name, e.job_id,j.job_title;
+
+--SQL GROUP BY and DISTINCT
+--If you use the GROUP BY clause without an aggregate function, the GROUP BY clause behaves like the DISTINCT operator.
+--The result set is the same except that the one returned by the DISTINCT operator is not sorted.
+SELECT
+	phone_number
+FROM
+	employees
+GROUP BY
+	phone_number;
+  
+  SELECT DISTINCT
+	phone_number
+FROM
+	employees;
